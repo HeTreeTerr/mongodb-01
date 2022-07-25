@@ -4,5 +4,5 @@ import com.hss.bean.UserInfoDetail;
 
 public interface UserInfoDetailDao {
 
-    UserInfoDetail insert(UserInfoDetail userInfoDetail);
+    UserInfoDetail save(UserInfoDetail userInfoDetail);
 }

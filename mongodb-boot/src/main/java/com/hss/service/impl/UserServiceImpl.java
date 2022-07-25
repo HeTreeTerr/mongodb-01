@@ -20,20 +20,20 @@ public class UserServiceImpl implements UserService {
     private UserInfoDetailDao userInfoDetailDao;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void createUser(CreateUserDTO userDTO) {
         UserInfo userInfo = UserInfo.builder()
                 .name(userDTO.getName())
                 .age(userDTO.getAge())
                 .build();
-        userInfo = userInfoDao.insert(userInfo);
-        if(true){
-            throw new RuntimeException("测试事务！");
-        }
+        userInfo = userInfoDao.save(userInfo);
+
         UserInfoDetail userInfoDetail = UserInfoDetail.builder()
                 .uid(userInfo.getId())
                 .tags(userDTO.getTags())
                 .build();
-        userInfoDetailDao.insert(userInfoDetail);
+        userInfoDetailDao.save(userInfoDetail);
+        //人造异常
+        //int a = 1/0;
     }
 }

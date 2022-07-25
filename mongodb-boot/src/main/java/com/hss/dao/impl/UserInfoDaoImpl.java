@@ -15,8 +15,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public UserInfo insert(UserInfo userInfo) {
-        userInfo = mongoTemplate.insert(userInfo, COLLECTION_NAME);
+    public UserInfo save(UserInfo userInfo) {
+        userInfo = mongoTemplate.save(userInfo, COLLECTION_NAME);
         return userInfo;
     }
 }

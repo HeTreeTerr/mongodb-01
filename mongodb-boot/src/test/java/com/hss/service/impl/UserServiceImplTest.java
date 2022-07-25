@@ -23,7 +23,7 @@ public class UserServiceImplTest {
     @Test
     public void createUser() {
         CreateUserDTO userDTO = CreateUserDTO.builder()
-                .name("zhangsan")
+                .name("lisi")
                 .age(18)
                 .tags(Arrays.asList("A","B","C"))
                 .build();
