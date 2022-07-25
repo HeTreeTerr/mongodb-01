@@ -1,6 +1,6 @@
 package com.hss;
 
-import com.hss.bean.Person;
+import com.hss.bean.UserInfo;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@SpringBootTest
+@SpringBootTest(classes = MongodbBootApplication.class)
 @RunWith(SpringRunner.class)
 @Slf4j
 public class MongodbBootApplicationTests {
@@ -31,11 +31,11 @@ public class MongodbBootApplicationTests {
      */
     @Test
     public void insert(){
-        Person person = Person.builder()
+        UserInfo person = UserInfo.builder()
                 .name("lisi")
                 .age(18)
                 .build();
-        Person insert = mongoTemplate.insert(person, COLLECTION_NAME);
+        UserInfo insert = mongoTemplate.insert(person, COLLECTION_NAME);
         log.info(insert.toString());
     }
 
@@ -44,7 +44,7 @@ public class MongodbBootApplicationTests {
      */
     @Test
     public void findOne(){
-        Person person = mongoTemplate.findById("62dd456007dbf40a102be99a", Person.class, COLLECTION_NAME);
+        UserInfo person = mongoTemplate.findById("62dd456007dbf40a102be99a", UserInfo.class, COLLECTION_NAME);
         log.info(person.toString());
     }
 
@@ -56,11 +56,11 @@ public class MongodbBootApplicationTests {
         UpdateResult updateResult = mongoTemplate.updateFirst(
                 Query.query(Criteria.where("name").is("lisi")),
                 Update.update("age", 28),
-                Person.class,
+                UserInfo.class,
                 COLLECTION_NAME);
         log.info(updateResult.toString());
 
-        Person person = mongoTemplate.findOne(Query.query(Criteria.where("name").is("lisi")), Person.class, COLLECTION_NAME);
+        UserInfo person = mongoTemplate.findOne(Query.query(Criteria.where("name").is("lisi")), UserInfo.class, COLLECTION_NAME);
         log.info("Updated: " + person);
     }
 
@@ -78,7 +78,7 @@ public class MongodbBootApplicationTests {
      */
     @Test
     public void findAll(){
-        List<Person> people =  mongoTemplate.findAll(Person.class,COLLECTION_NAME);
+        List<UserInfo> people =  mongoTemplate.findAll(UserInfo.class,COLLECTION_NAME);
         log.info("Number of people = : " + people.size());
     }
 

@@ -5,15 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Person {
+public class UserInfoDetail {
 
-    private String id;
+    private String uid;
 
-    private String name;
-
-    private int age;
+    private List<String> tags;
 }
